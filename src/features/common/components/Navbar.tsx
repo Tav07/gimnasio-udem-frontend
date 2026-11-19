@@ -2,7 +2,8 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import { useSesion } from '@/features/auth/hooks/useSesion';
 
 interface Ruta {
   ruta: string;
@@ -20,6 +21,8 @@ const RUTAS: Ruta[] = [
 export function Navbar() {
   const [abierto, setAbierto] = useState(false);
   const rutaActual = usePathname();
+  const { sesion, cargandoSesion, cerrarSesion } = useSesion();
+  const router = useRouter();
 
   function esActual(ruta: string): boolean {
     return ruta === '/' ? rutaActual === '/' : rutaActual.startsWith(ruta);
@@ -27,6 +30,12 @@ export function Navbar() {
 
   function clase(ruta: string): string {
     return esActual(ruta) ? 'font-semibold text-udem' : 'text-neutral-700 hover:text-udem';
+  }
+
+  function salir() {
+    cerrarSesion();
+    setAbierto(false);
+    router.push('/');
   }
 
   return (
@@ -37,19 +46,22 @@ export function Navbar() {
         </Link>
 
         <nav className="hidden items-center gap-6 md:flex" aria-label="Principal">
-          {RUTAS.map((rutaObj) => (
+          {RUTAS.map((ruta) => (
             <Link
-              key={rutaObj.ruta}
-              href={rutaObj.ruta}
-              className={`text-sm ${clase(rutaObj.ruta)}`}
-              aria-current={esActual(rutaObj.ruta) ? 'page' : undefined}
+              key={ruta.ruta}
+              href={ruta.ruta}
+              className={`text-sm ${clase(ruta.ruta)}`}
+              aria-current={esActual(ruta.ruta) ? 'page' : undefined}
             >
-              {rutaObj.texto}
+              {ruta.texto}
             </Link>
           ))}
-          <Link href="/login" className="text-sm font-medium text-udem hover:underline">
-            Iniciar sesión
-          </Link>
+          <EspacioSesion
+            sesion={sesion}
+            cargando={cargandoSesion}
+            nombreClase="text-sm"
+            salir={salir}
+          />
         </nav>
 
         <button
@@ -68,25 +80,54 @@ export function Navbar() {
           className="flex flex-col gap-1 border-t border-neutral-200 px-4 py-3 md:hidden"
           aria-label="Principal en móvil"
         >
-          {RUTAS.map((rutaObj) => (
+          {RUTAS.map((ruta) => (
             <Link
-              key={rutaObj.ruta}
-              href={rutaObj.ruta}
-              className={`py-1 text-sm ${clase(rutaObj.ruta)}`}
+              key={ruta.ruta}
+              href={ruta.ruta}
+              className={`py-1 text-sm ${clase(ruta.ruta)}`}
               onClick={() => setAbierto(false)}
             >
-              {rutaObj.texto}
+              {ruta.texto}
             </Link>
           ))}
-          <Link
-            href="/login"
-            className="py-1 text-sm font-medium text-udem"
-            onClick={() => setAbierto(false)}
-          >
-            Iniciar sesión
-          </Link>
+          <EspacioSesion
+            sesion={sesion}
+            cargando={cargandoSesion}
+            nombreClase="py-1 text-sm"
+            salir={salir}
+          />
         </nav>
       )}
     </header>
+  );
+}
+
+interface PropiedadesEspacio {
+  sesion: { nombre: string } | null;
+  cargando: boolean;
+  nombreClase: string;
+  salir: () => void;
+}
+
+// Zona derecha del navbar: mientras recupera la sesión no muestra nada,
+// con sesión el nombre y el logout, y sin sesión el acceso al login.
+function EspacioSesion({ sesion, cargando, nombreClase, salir }: PropiedadesEspacio) {
+  if (cargando) {
+    return null;
+  }
+  if (sesion) {
+    return (
+      <div className={`flex items-center gap-3 ${nombreClase}`}>
+        <span className="text-neutral-700">{sesion.nombre}</span>
+        <button type="button" className="text-udem hover:underline" onClick={salir}>
+          Cerrar sesión
+        </button>
+      </div>
+    );
+  }
+  return (
+    <Link href="/login" className={`${nombreClase} font-medium text-udem hover:underline`}>
+      Iniciar sesión
+    </Link>
   );
 }
