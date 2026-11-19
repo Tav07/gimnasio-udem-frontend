@@ -55,9 +55,9 @@ export default function Inicio() {
           <Image
             src="/logo_en_blanco.png"
             alt="Universidad de Medellín"
-            width={447}
-            height={447}
-            className="mx-auto h-28 w-auto rounded-lg"
+            width={418}
+            height={145}
+            className="mx-auto h-56 w-auto max-w-full rounded-lg"
             priority
           />
           <h1 className="mx-auto mt-6 max-w-2xl text-4xl font-bold text-white">

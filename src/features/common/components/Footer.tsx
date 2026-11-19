@@ -13,7 +13,7 @@ export function Footer() {
           src="/universidad_medellin.png"
           alt="Universidad de Medellín"
           width={360}
-          height={360}
+          height={104}
           className="h-9 w-auto self-start sm:self-center"
         />
       </div>

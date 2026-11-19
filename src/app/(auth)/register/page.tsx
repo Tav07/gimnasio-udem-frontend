@@ -16,7 +16,7 @@ export default function Registrar() {
         src="/universidad_medellin.png"
         alt="Universidad de Medellín"
         width={360}
-        height={360}
+        height={104}
         className="h-12 w-auto self-center"
       />
       <div>

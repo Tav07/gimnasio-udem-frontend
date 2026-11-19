@@ -48,8 +48,8 @@ export function Navbar() {
             src="/universidad_medellin.png"
             alt="Universidad de Medellín"
             width={360}
-            height={360}
-            className="h-10 w-auto"
+            height={104}
+            className="h-20 w-auto"
             priority
           />
         </Link>
