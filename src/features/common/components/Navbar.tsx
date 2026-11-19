@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useSesion } from '@/features/auth/hooks/useSesion';
@@ -41,8 +42,16 @@ export function Navbar() {
   return (
     <header className="border-b border-neutral-200 bg-white">
       <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
-        <Link href="/" className="text-lg font-bold text-udem">
-          Gimnasio UdeM
+        <Link href="/" aria-label="Gimnasio UdeM, inicio" className="shrink-0">
+          {/* Logo oficial de la Universidad de Medellín sobre fondo blanco. */}
+          <Image
+            src="/universidad_medellin.png"
+            alt="Universidad de Medellín"
+            width={360}
+            height={360}
+            className="h-10 w-auto"
+            priority
+          />
         </Link>
 
         <nav className="hidden items-center gap-6 md:flex" aria-label="Principal">

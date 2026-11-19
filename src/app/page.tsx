@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Boton } from '@/features/common/components/Boton';
+import Image from 'next/image';
 
 interface Destacado {
   titulo: string;
@@ -50,24 +50,38 @@ const PASOS: Paso[] = [
 export default function Inicio() {
   return (
     <div>
-      <section className="bg-neutral-50">
+      <section className="bg-udem">
         <div className="mx-auto max-w-5xl px-4 py-16 text-center">
-          <h1 className="mx-auto max-w-2xl text-4xl font-bold text-neutral-900">
+          <Image
+            src="/logo_en_blanco.png"
+            alt="Universidad de Medellín"
+            width={447}
+            height={447}
+            className="mx-auto h-28 w-auto rounded-lg"
+            priority
+          />
+          <h1 className="mx-auto mt-6 max-w-2xl text-4xl font-bold text-white">
             Reserva tu espacio en el gimnasio de la UdeM
           </h1>
-          <p className="mx-auto mt-4 max-w-xl text-neutral-600">
+          <p className="mx-auto mt-4 max-w-xl text-white/85">
             Un horario claro, bloques de dos horas y tu lugar garantizado. El gimnasio de la
             Universidad de Medellín es para toda la comunidad: estudiantes, empleados y egresados.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Link href="/register">
-              <Boton>Registrarme</Boton>
+            <Link
+              href="/register"
+              className="rounded bg-white px-6 py-2.5 text-sm font-medium text-udem transition-colors hover:bg-red-50"
+            >
+              Registrarme
             </Link>
-            <Link href="/login">
-              <Boton variante="secundario">Iniciar sesión</Boton>
+            <Link
+              href="/login"
+              className="rounded border border-white/70 px-6 py-2.5 text-sm font-medium text-white transition-colors hover:bg-white/10"
+            >
+              Iniciar sesión
             </Link>
           </div>
-          <p className="mt-6 text-sm text-neutral-500">
+          <p className="mt-6 text-sm text-white/75">
             ¿Primera vez? Se reserva el día hábil anterior, desde las 6:00 a. m.
           </p>
         </div>

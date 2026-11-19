@@ -12,10 +12,10 @@
   --font-mono: var(--font-geist-mono);
 }
 
-/* Azul institucional de la UdeM como acento de la paleta. */
+/* Rojo institucional de la UdeM como acento de la paleta (toma del logo). */
 @theme {
-  --color-udem: #005ca9;
-  --color-udem-oscuro: #00477f;
+  --color-udem: #b71717;
+  --color-udem-oscuro: #8f1212;
 }
 
 body {
