@@ -18,6 +18,8 @@ export default function PaginaMaquinas() {
 
   const { maquinas, paginaActual, totalPaginas, total, cargando, error, recargar } = useMaquinas({
     pagina,
+    // 9 por página: la cuadrícula muestra tres filas de tres completas.
+    limite: 9,
     categoria: categoria ?? undefined,
     buscar: buscar || undefined,
   });

@@ -10,7 +10,7 @@ const ERROR_DE_LISTA: ErrorApi = { mensaje: 'No se pudieron cargar las máquinas
 // La página es dueña de los filtros; cada cambio vuelve a consultar la API.
 // El efecto solo actualiza estado dentro de los callbacks de la promesa.
 export function useMaquinas(filtros: FiltrosDeMaquinas) {
-  const { pagina, categoria, buscar } = filtros;
+  const { pagina, limite, categoria, buscar } = filtros;
   const [maquinas, setMaquinas] = useState<Maquina[]>([]);
   const [paginaActual, setPaginaActual] = useState(1);
   const [totalPaginas, setTotalPaginas] = useState(1);
@@ -22,7 +22,7 @@ export function useMaquinas(filtros: FiltrosDeMaquinas) {
 
   useEffect(() => {
     let activo = true;
-    listarMaquinas({ pagina, categoria, buscar })
+    listarMaquinas({ pagina, limite, categoria, buscar })
       .then((resultado) => {
         if (!activo) {
           return;
@@ -45,7 +45,7 @@ export function useMaquinas(filtros: FiltrosDeMaquinas) {
     return () => {
       activo = false;
     };
-  }, [pagina, categoria, buscar, intentos]);
+  }, [pagina, limite, categoria, buscar, intentos]);
 
   const recargar = useCallback(() => {
     setCargando(true);

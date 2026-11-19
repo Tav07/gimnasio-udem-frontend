@@ -22,6 +22,7 @@ export interface DatosDeMaquina {
 
 export interface FiltrosDeMaquinas {
   pagina: number;
+  limite?: number;
   categoria?: CategoriaMaquina;
   estado?: EstadoMaquina;
   buscar?: string;

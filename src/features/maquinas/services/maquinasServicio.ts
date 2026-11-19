@@ -5,7 +5,12 @@ import { DatosDeMaquina, FiltrosDeMaquinas, Maquina } from '../domain/tipos';
 // Los services son la única capa de la feature que arma las rutas de la API.
 
 export async function listarMaquinas(filtros: FiltrosDeMaquinas): Promise<Paginado<Maquina>> {
+  // La API usa 10 por página; el catálogo pide 9 para llenar la cuadrícula
+  // de tres por tres. Si no se indica, queda el valor por defecto.
   const consulta = new URLSearchParams({ page: String(filtros.pagina) });
+  if (filtros.limite) {
+    consulta.set('limit', String(filtros.limite));
+  }
   if (filtros.categoria) {
     consulta.set('categoria', filtros.categoria);
   }
