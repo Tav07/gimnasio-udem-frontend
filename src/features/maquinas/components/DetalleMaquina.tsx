@@ -14,9 +14,7 @@ export function DetalleMaquina({ id }: { id: string }) {
     return <EstadoCargando texto="Cargando la máquina…" />;
   }
   if (noEncontrada) {
-    return (
-      <EstadoVacio mensaje="No encontramos esta máquina, puede haber sido eliminada" />
-    );
+    return <EstadoVacio mensaje="No encontramos esta máquina, puede haber sido eliminada" />;
   }
   if (error || !maquina) {
     return <EstadoError mensaje="No se pudo cargar la máquina" onReintentar={recargar} />;

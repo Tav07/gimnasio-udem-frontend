@@ -24,6 +24,7 @@ export function useMisReservas(filtros: { pagina: number; estado?: string | null
     let activo = true;
     listarReservas({
       pagina,
+      limite: 10,
       estado: estado === 'ACTIVA' || estado === 'CANCELADA' ? estado : undefined,
     })
       .then((resultado) => {

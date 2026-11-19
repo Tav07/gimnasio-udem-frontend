@@ -29,9 +29,7 @@ export function TarjetaMaquina({ maquina }: { maquina: Maquina }) {
       </div>
       <div className="flex flex-1 flex-col gap-2 p-4">
         <div className="flex items-start justify-between gap-2">
-          <h3 className="font-semibold text-neutral-900 group-hover:text-udem">
-            {maquina.nombre}
-          </h3>
+          <h3 className="font-semibold text-neutral-900 group-hover:text-udem">{maquina.nombre}</h3>
           <span
             className={`shrink-0 rounded-full border px-2 py-0.5 text-xs ${ESTILOS_DE_ESTADO[maquina.estado] ?? 'border-neutral-400 text-neutral-500'}`}
           >

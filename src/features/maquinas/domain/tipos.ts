@@ -12,9 +12,18 @@ export interface Maquina {
   actualizadoEn: string;
 }
 
+// Datos que acepta el formulario de máquinas: los tres que pide el backend
+// al crear.
+export interface DatosDeMaquina {
+  nombre: string;
+  descripcion: string;
+  categoria: CategoriaMaquina;
+}
+
 export interface FiltrosDeMaquinas {
   pagina: number;
   categoria?: CategoriaMaquina;
+  estado?: EstadoMaquina;
   buscar?: string;
 }
 
