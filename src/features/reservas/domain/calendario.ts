@@ -54,3 +54,19 @@ export function nombreDeDia(fecha: string): string {
     timeZone: 'UTC',
   });
 }
+
+// El instante actual en Bogotá, partido en fecha y hora para comparar fácil.
+export function ahoraEnBogota(): { fecha: string; hora: string } {
+  const instante = new Date(Date.now() - DESFASE_BOGOTA_MILISEGUNDOS).toISOString();
+  return { fecha: instante.slice(0, 10), hora: instante.slice(11, 16) };
+}
+
+// RN6: la cancelación vale hasta la hora de inicio del bloque. Las cadenas
+// "YYYY-MM-DD" y "HH:mm" se comparan lexicográficamente sin problema.
+export function bloqueYaIniciado(fecha: string, horaInicio: string): boolean {
+  const ahora = ahoraEnBogota();
+  if (fecha !== ahora.fecha) {
+    return fecha < ahora.fecha;
+  }
+  return horaInicio <= ahora.hora;
+}
